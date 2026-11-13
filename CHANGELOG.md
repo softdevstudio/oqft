@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.0
+
+- Added `oqft check` for exhaustive, explicit and seeded sampled basis
+  checks against the textbook QFT.
+- Added text and CSV reports for squared error, threshold failures and
+  estimated block values, plus recorded checker examples.
+
 ## 0.2.0
 
 - Added the ancilla-free optimistic QFT generator and OpenQASM 3 export

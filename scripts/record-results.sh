@@ -25,4 +25,12 @@ go test -count=1 -v ./... 2>&1 | tee test/results/tests.txt
     echo
   done
 } > test/results/optimistic-stats.txt
+go run ./cmd/oqft check -n 4 --eps 0.01 > test/results/check-exhaustive.txt
+go run ./cmd/oqft check -n 17 --eps 1 --samples 8 --seed 42 > test/results/check-sampled.txt
+{
+  go run ./cmd/oqft check -n 12 --block-width 3 --basis 7 --threshold 0.5 --format csv
+  for basis in 15 23 31 39 47 55 63; do
+    go run ./cmd/oqft check -n 12 --block-width 3 --basis "$basis" --threshold 0.5 --format csv | sed '1d'
+  done
+} > test/results/check-wraparound.csv
 echo "recorded to test/results"

@@ -41,11 +41,33 @@ The Go library also simulates circuits and builds their full unitary
 matrices. The [recorded results](test/results/) include sample stats and
 the test run. Regenerate them with `scripts/record-results.sh`.
 
-The optimistic generator is available in v0.2.0. Its epsilon is the bound
+The optimistic generator uses epsilon as the bound
 on normalized squared Frobenius error and defaults to 0.01. Small
 registers may use the exact circuit when the bound calls for a width
-that leaves at most two blocks. The circuit checker, RSA resource
-estimator and browser calculator are planned in [CLAUDE.md](CLAUDE.md).
+that leaves at most two blocks. The RSA resource estimator and browser calculator are planned in
+[CLAUDE.md](CLAUDE.md).
+
+## Check a circuit
+
+```sh
+oqft check -n 4 --eps 0.01
+oqft check -n 17 --eps 1 --samples 8 --seed 42
+oqft check -n 12 --block-width 3 --basis 63 --threshold 0.5 --format csv
+```
+
+The checker compares output amplitudes with the textbook QFT for each
+selected basis input. It checks all inputs by default through 10
+qubits. For larger registers through 20 qubits, select one input with
+`--basis` or draw distinct inputs with `--samples`. The seed makes a
+sample reproducible. A sample mean describes only the selected inputs.
+
+Epsilon controls circuit sizing. The independent per-state threshold
+defaults to 0.1 and flags rows whose squared error exceeds it. Flagged
+rows are reported as data, and a successfully written report exits zero.
+For diagnostics, `--block-width` bypasses epsilon sizing and exposes
+wraparound within the simulator limit. The
+[recorded CSV](test/results/check-wraparound.csv) sweeps the estimated
+block through all eight values with the neighboring block held fixed.
 
 ## Licence
 

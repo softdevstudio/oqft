@@ -39,6 +39,9 @@ func TestCheckCLI(t *testing.T) {
 	if got := invoke("-n", "3", "--basis", "7", "--format", "csv"); !strings.Contains(got, "\n7,111,-,0,false\n") {
 		t.Fatalf("unexpected explicit basis report: %s", got)
 	}
+	if got := invoke("-n", "4", "--basis", "010", "--format", "csv"); !strings.Contains(got, "\n10,1010,-,0,false\n") {
+		t.Fatalf("unexpected decimal basis report: %s", got)
+	}
 }
 
 func TestCheckWraparoundMap(t *testing.T) {

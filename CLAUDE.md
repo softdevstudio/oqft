@@ -148,10 +148,11 @@ hardware layout planner (arXiv:2605.15297); other optimistic circuits
 
 ### Assignment 3c: checker results and v0.3.0
 
-- [x] Pull main and pass baseline tests.
-- [ ] Complete independent review and fix release blockers.
-- [ ] Extend the recorder and document the checker.
-- [ ] Raise version, verify publication and assets, and record results.
+- [x] Complete independent review and make --basis parse decimal.
+- [x] Document the checker, extend the recorder, and set version 0.3.0.
+- [ ] Verify CI, publication and archives, and record results.
+
+Resume with the release workflow and recorder.
 
 ## Done
 

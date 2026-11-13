@@ -19,7 +19,18 @@ func runCheck(args []string, stdout, stderr io.Writer) int {
 	eps := flags.Float64("eps", defaultEpsilon, "OQFT mean squared error bound")
 	explicitWidth := flags.Int("block-width", 0, "diagnostic block width; zero selects by epsilon")
 	threshold := flags.Float64("threshold", 0.1, "flag states with squared error above this value")
-	basis := flags.Int("basis", -1, "check only this decimal basis index")
+	basis := -1
+	flags.Func("basis", "check only this decimal basis index", func(value string) error {
+		index, err := strconv.Atoi(value)
+		if err != nil {
+			return err
+		}
+		if index < 0 {
+			return fmt.Errorf("basis index must be nonnegative")
+		}
+		basis = index
+		return nil
+	})
 	samples := flags.Int("samples", 0, "number of distinct random basis states")
 	seed := flags.Uint64("seed", 1, "seed for random sampling")
 	format := flags.String("format", "text", "report format (text or csv)")
@@ -52,13 +63,13 @@ func runCheck(args []string, stdout, stderr io.Writer) int {
 	}
 	size := 1 << *n
 	switch {
-	case *basis < -1 || *basis >= size:
+	case basis >= size:
 		return fail("--basis is outside the register")
 	case *samples < 0 || *samples > size:
 		return fail("--samples must be between zero and the number of basis states")
-	case *basis >= 0 && *samples != 0:
+	case basis >= 0 && *samples != 0:
 		return fail("choose either --basis or --samples")
-	case *basis == -1 && *samples == 0 && *n > oqft.MaxUnitaryQubits:
+	case basis == -1 && *samples == 0 && *n > oqft.MaxUnitaryQubits:
 		return fail("use --basis or --samples for registers above 10 qubits")
 	}
 
@@ -85,8 +96,8 @@ func runCheck(args []string, stdout, stderr io.Writer) int {
 	count := size
 	var selected []int
 	switch {
-	case *basis >= 0:
-		count, selected = 1, []int{*basis}
+	case basis >= 0:
+		count, selected = 1, []int{basis}
 	case *samples > 0 && *samples < size:
 		count = *samples
 		// Draw without replacement with a sparse partial Fisher-Yates shuffle.

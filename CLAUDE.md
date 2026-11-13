@@ -91,7 +91,7 @@ updated. Ask the owner for his go before starting each phase.
 1. [ ] Circuit core and simulator (0.1.0), in assignments:
    - [x] 1a Circuit model: gates H, controlled phase, swap, Z rotation;
      circuit type; gate count and depth. Done when unit tests pass.
-   - [ ] 1b Statevector simulator (n <= 20). Done when single-gate and
+   - [x] 1b Statevector simulator (n <= 20). Done when single-gate and
      small-circuit tests pass.
    - [ ] 1c Textbook QFT generator and full-unitary builder (n <= 10).
      Done when the QFT equals the DFT matrix for n = 1..10.
@@ -140,20 +140,18 @@ hardware layout planner (arXiv:2605.15297); other optimistic circuits
 
 ## In progress
 
-### Assignment 1b: statevector simulator
-
-Simulate circuits on up to 20 qubits using complex128 amplitudes.
-Qubit 0 is the least significant basis-index bit. Provide a basis-state
-entry point and in-place evolution for arbitrary input vectors. Validate
-circuit sizes, gate operands, and input sizes before mutating amplitudes.
-
-- [x] Pull main and run the baseline tests with Go 1.24.7.
-- [ ] Implement the four gates and test each one, plus a small circuit.
-- [ ] Run checks, push the implementation, and verify CI.
-
-Resume with the simulator implementation and tests.
+Nothing. Next is assignment 1c, the textbook QFT generator and
+full-unitary builder. Use Simulate to generate columns in basis order.
 
 ## Done
+
+### Assignment 1b: statevector simulator (2026-11-13, Codex)
+
+`simulate.go` provides `Circuit.Simulate(basis)` and in-place
+`Circuit.Evolve(state)` for 1–20 qubits. Both validate the circuit,
+and Evolve validates the vector length before changing any amplitudes.
+Qubit 0 is the least significant bit. Tests cover all four gates, gate
+order in a small circuit, complex input, and validation boundaries.
 
 ### Assignment 1a: circuit model (2026-11-13, Claude)
 
@@ -179,8 +177,9 @@ scripts/record-results.sh.
 
 ## State
 
-0.0.0. Circuit model in place (1a). Nothing released.
+0.0.0. Circuit model and simulator in place (1a–1b). Nothing released.
 
 ## Gaps and to-do
 
+- Textbook QFT and full-unitary construction remain open (1c).
 - Site repo photozeitgeist/oqft.com doesn't exist yet (needed for Phase 4).

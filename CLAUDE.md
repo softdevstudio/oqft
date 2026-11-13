@@ -119,6 +119,9 @@ updated. Ask the owner for his go before starting each phase.
    failing states, failure map (text and CSV) showing the wraparound edges;
    random-basis check; failure tests that fail where predicted and only
    there.
+   - [ ] 3a Per-state error checker and wraparound regression test.
+   - [ ] 3b CLI, exhaustive and sampled reports, text and CSV maps.
+   - [ ] 3c Recorded results, independent review and v0.3.0 release.
 4. [ ] Site launch: oqft.com on the Launch template. Pages About (incl. the
    name), Contact (info@oqft.com), Quick Start, Download, Reference. Posts:
    launch, plain-language explainer of optimistic circuits, how it was
@@ -143,7 +146,16 @@ hardware layout planner (arXiv:2605.15297); other optimistic circuits
 
 ## In progress
 
-Nothing. Phase 3, the circuit checker, is next with the owner's go.
+### Assignment 3a: per-state error checker
+
+Build a reusable checker that compares a generated circuit against the
+exact QFT one basis state at a time. Return squared amplitude distance
+and validate register size and basis indices. Keep selection, reporting,
+and failure maps for the next assignment.
+
+- [x] Pull main and pass baseline tests.
+- [ ] Implement and test per-state error measurement.
+- [ ] Push and verify CI.
 
 ## Done
 

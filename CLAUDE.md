@@ -143,7 +143,15 @@ hardware layout planner (arXiv:2605.15297); other optimistic circuits
 
 ## In progress
 
-Nothing. Next is assignment 2c, epsilon sizing, CLI integration and validation.
+### Assignment 2c: epsilon sizing, CLI and validation
+
+Use a conservative bound on the normalized squared Frobenius error.
+Choose the first block width that meets it, with an exact path when two
+blocks suffice. Expose OQFT in gen and add reproducible depth results.
+
+- [x] Pull main and run baseline tests.
+- [ ] Implement and test sizing and the CLI.
+- [ ] Push code, record results from that commit, and verify CI.
 
 ## Done
 

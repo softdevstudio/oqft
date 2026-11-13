@@ -146,7 +146,12 @@ hardware layout planner (arXiv:2605.15297); other optimistic circuits
 
 ## In progress
 
-Nothing. Next is assignment 3c, recorded checker results, independent review and v0.3.0.
+### Assignment 3c: checker results and v0.3.0
+
+- [x] Pull main and pass baseline tests.
+- [ ] Complete independent review and fix release blockers.
+- [ ] Extend the recorder and document the checker.
+- [ ] Raise version, verify publication and assets, and record results.
 
 ## Done
 

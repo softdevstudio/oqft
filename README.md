@@ -41,7 +41,7 @@ The Go library also simulates circuits and builds their full unitary
 matrices. The [recorded results](test/results/) include sample stats and
 the test run. Regenerate them with `scripts/record-results.sh`.
 
-The optimistic generator is available on main. Its epsilon is the bound
+The optimistic generator is available in v0.2.0. Its epsilon is the bound
 on normalized squared Frobenius error and defaults to 0.01. Small
 registers may use the exact circuit when the bound calls for a width
 that leaves at most two blocks. The circuit checker, RSA resource

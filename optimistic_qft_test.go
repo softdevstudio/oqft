@@ -3,6 +3,7 @@ package oqft
 import (
 	"math"
 	"math/cmplx"
+	"slices"
 	"testing"
 )
 
@@ -168,5 +169,39 @@ func TestOQFTSizingAndDepth(t *testing.T) {
 		if width >= n/2 || circuit.Depth() > 11*width || circuit.Depth() >= 2*n {
 			t.Fatalf("%d qubits: block width %d, depth %d", n, width, circuit.Depth())
 		}
+	}
+}
+
+func TestOQFTSelectedWidthSampleError(t *testing.T) {
+	const n, eps = 17, 1.0
+	circuit, err := OQFT(n, eps)
+	if err != nil {
+		t.Fatal(err)
+	}
+	exact, err := QFT(n)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if slices.Equal(circuit.Gates, exact.Gates) {
+		t.Fatal("expected the commuted circuit")
+	}
+	inputs := []int{0, 1, 0x15555, 0x0aaaa, 0x100ff, 0x1ff00, 0x1ffff}
+	var squaredError float64
+	for _, input := range inputs {
+		got, err := circuit.Simulate(input)
+		if err != nil {
+			t.Fatal(err)
+		}
+		want, err := exact.Simulate(input)
+		if err != nil {
+			t.Fatal(err)
+		}
+		for i, value := range got {
+			delta := cmplx.Abs(value - want[i])
+			squaredError += delta * delta
+		}
+	}
+	if mean := squaredError / float64(len(inputs)); !(mean > 0 && mean < eps) {
+		t.Fatalf("sample mean squared error %g, expected between zero and %g", mean, eps)
 	}
 }

@@ -145,10 +145,11 @@ hardware layout planner (arXiv:2605.15297); other optimistic circuits
 
 ### Assignment 2d: independent review and v0.2.0
 
-- [x] Pull main and run baseline tests.
-- [ ] Complete independent review and address any release blockers.
-- [ ] Raise the version, verify CI and Release, and test downloaded assets.
-- [ ] Record results from the release commit and close Phase 2.
+- [x] Complete independent review of circuit parity, phase estimation
+  and error sizing. Add sampled simulator coverage for public sizing.
+- [x] Raise all version markers to 0.2.0 and pass local checks.
+- [ ] Verify CI, Release and downloaded assets.
+- [ ] Refresh recorded results and close Phase 2.
 
 ## Done
 

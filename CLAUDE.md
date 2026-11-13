@@ -146,7 +146,14 @@ hardware layout planner (arXiv:2605.15297); other optimistic circuits
 
 ## In progress
 
-Nothing. Next is assignment 3b, checker CLI and failure maps.
+### Assignment 3b: checker CLI and failure maps
+
+Add exact, sampled, and explicit-basis checks. Show binary basis indices
+and estimated-block values, squared error, and failure status in text
+and CSV. Separate per-state threshold from the OQFT mean error bound.
+
+- [x] Pull main and pass baseline tests.
+- [ ] Implement, test, and verify CI.
 
 ## Done
 

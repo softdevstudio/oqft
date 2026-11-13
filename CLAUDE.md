@@ -93,7 +93,7 @@ updated. Ask the owner for his go before starting each phase.
      circuit type; gate count and depth. Done when unit tests pass.
    - [x] 1b Statevector simulator (n <= 20). Done when single-gate and
      small-circuit tests pass.
-   - [ ] 1c Textbook QFT generator and full-unitary builder (n <= 10).
+   - [x] 1c Textbook QFT generator and full-unitary builder (n <= 10).
      Done when the QFT equals the DFT matrix for n = 1..10.
    - [ ] 1d Approximate QFT generator (drops rotations below a cutoff).
      Done when error shrinks as the cutoff rises, checked against the
@@ -140,21 +140,17 @@ hardware layout planner (arXiv:2605.15297); other optimistic circuits
 
 ## In progress
 
-### Assignment 1c: textbook QFT and full unitary
-
-Generate the positive-sign QFT, ending with swaps so input and output
-indices both use the simulator's basis order. Build the full matrix for
-circuits of up to 10 qubits, with output indices as rows and input
-indices as columns.
-
-- [x] Pull main and pass baseline checks.
-- [ ] Implement the circuit and matrix builder, then compare every
-  matrix element against the analytic DFT for 1 through 10 qubits.
-- [ ] Push the implementation and verify CI.
-
-Resume with the generator and matrix builder.
+Nothing. Next is assignment 1d, the approximate QFT generator.
 
 ## Done
+
+### Assignment 1c: textbook QFT and full unitary (2026-11-13, Codex)
+
+`QFT(n)` generates the positive-sign textbook QFT, including the final
+bit-reversal swaps. `Circuit.Unitary()` builds the matrix through 10
+qubits, with output rows and input columns, using the statevector
+simulator. Tests compare every element to the analytic DFT for 1 through
+10 qubits and check textbook gate counts and input validation.
 
 ### Assignment 1b: statevector simulator (2026-11-13, Codex)
 
@@ -188,9 +184,9 @@ scripts/record-results.sh.
 
 ## State
 
-0.0.0. Circuit model and simulator in place (1a–1b). Nothing released.
+0.0.0. Circuit model, simulator and textbook QFT in place (1a–1c). Nothing released.
 
 ## Gaps and to-do
 
-- Textbook QFT and full-unitary construction remain open (1c).
+- Approximate QFT remains open (1d).
 - Site repo photozeitgeist/oqft.com doesn't exist yet (needed for Phase 4).

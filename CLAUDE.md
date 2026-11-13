@@ -89,7 +89,7 @@ updated. Ask the owner for his go before starting each phase.
 0. [x] Repo setup: module, `oqft version`, CI, release workflow, this file
    and AGENTS.md. No release.
 1. [ ] Circuit core and simulator (0.1.0), in assignments:
-   - [ ] 1a Circuit model: gates H, controlled phase, swap, Z rotation;
+   - [x] 1a Circuit model: gates H, controlled phase, swap, Z rotation;
      circuit type; gate count and depth. Done when unit tests pass.
    - [ ] 1b Statevector simulator (n <= 20). Done when single-gate and
      small-circuit tests pass.
@@ -140,34 +140,23 @@ hardware layout planner (arXiv:2605.15297); other optimistic circuits
 
 ## In progress
 
-### Assignment 1a: circuit model (Claude, started 2026-11-13)
-
-What and why: every later piece (simulator, generators, QASM export,
-stats, OQFT) works on one circuit type, so it comes first.
-
-Design decisions:
-- File `circuit.go` in the root package `oqft`.
-- `GateKind`: `H`, `CPhase`, `Swap`, `RZ`. Names match OpenQASM 3
-  (`h`, `cp`, `swap`, `rz`) so 1e can print them directly.
-- `Gate{Kind, Q0, Q1, Angle}`. Q1 is used by two-qubit gates only (for
-  `CPhase` Q0 is control, Q1 target; the gate is symmetric anyway). Angle
-  in radians, used by `CPhase` and `RZ`.
-- `Circuit{N, Gates}`. `NewCircuit(n)` rejects n < 1. `Add(Gate) error`
-  validates (qubits in range, two-qubit gates on distinct qubits, angle
-  finite, no angle on H/Swap) for input from outside; the helpers `H`,
-  `CP`, `Swap`, `RZ` call it and panic on error, for generator code where
-  a bad gate is a bug.
-- `Counts()` per kind, `Len()`, `TwoQubit()`, `Depth()`: ASAP layering,
-  each gate starts after the latest earlier gate on any of its qubits.
-  Every gate counts as one layer (no gate costs yet).
-
-Steps:
-1. [ ] circuit.go and circuit_test.go
-2. [ ] gofmt, vet, race tests; push; CI green; tick 1a in the plan
-
-Resume at: step 1.
+Nothing. Next is assignment 1b (statevector simulator), once the owner
+says "next assignment". Start by writing its In progress section here.
 
 ## Done
+
+### Assignment 1a: circuit model (2026-11-13, Claude)
+
+`circuit.go`: `GateKind` (`H`, `CPhase`, `Swap`, `RZ`; `String()` gives
+the OpenQASM 3 names h, cp, swap, rz; `Kinds` lists them in order),
+`Gate{Kind, Q0, Q1, Angle}` with `Check(n)`, `Circuit{N, Gates}` with
+`NewCircuit`, `Add` (validates, returns error), chainable helpers `H`,
+`CP(control, target, theta)`, `Swap`, `RZ` (panic on a bad gate),
+`Len`, `Counts`, `TwoQubit`, `Depth` (ASAP layers, one layer per gate).
+Conventions for 1b: CPhase is diag(1,1,1,e^{iθ}); RZ is
+diag(e^{-iθ/2}, e^{iθ/2}); qubit 0 is the least significant bit of the
+basis-state index (to be fixed in 1b's simulator and kept everywhere).
+Tests in `circuit_test.go`: validation errors, panics, counts, depth.
 
 ### Phase 0: repo setup (2026-11-13, Claude)
 
@@ -180,10 +169,8 @@ scripts/record-results.sh.
 
 ## State
 
-0.0.0, setup only. Nothing released.
+0.0.0. Circuit model in place (1a). Nothing released.
 
 ## Gaps and to-do
 
 - Site repo photozeitgeist/oqft.com doesn't exist yet (needed for Phase 4).
-- The language (Go) was set from the plan's recommendation; the owner can
-  still change it before assignment 1a starts.

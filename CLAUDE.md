@@ -139,7 +139,17 @@ hardware layout planner (arXiv:2605.15297); other optimistic circuits
 
 ## In progress
 
-Nothing. Next is assignment 1f, stats, recorded results and documentation.
+### Assignment 1f: stats and recorded results
+
+Compare QFT and AQFT side by side for a requested register size and
+cutoff. Record representative outputs with the existing results script.
+Update the README and unreleased changelog without changing the version.
+
+- [x] Pull main and pass baseline checks.
+- [ ] Implement and test stats, extend the recorder, update docs, and push.
+- [ ] Record results from the implementation commit, push, and verify CI.
+
+Resume with the stats command.
 
 ## Done
 

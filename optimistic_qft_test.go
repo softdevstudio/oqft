@@ -18,7 +18,7 @@ func TestOptimisticQFTCommutation(t *testing.T) {
 		if err != nil {
 			t.Fatal(err)
 		}
-		optimistic, err := optimisticQFT(tc.n, tc.width)
+		optimistic, err := OQFTWithBlockWidth(tc.n, tc.width)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -52,11 +52,11 @@ func TestOptimisticQFTCommutation(t *testing.T) {
 
 func TestOptimisticQFTDepth(t *testing.T) {
 	const width = 4
-	small, err := optimisticQFT(8*width, width)
+	small, err := OQFTWithBlockWidth(8*width, width)
 	if err != nil {
 		t.Fatal(err)
 	}
-	large, err := optimisticQFT(512*width, width)
+	large, err := OQFTWithBlockWidth(512*width, width)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -67,14 +67,14 @@ func TestOptimisticQFTDepth(t *testing.T) {
 
 func TestOptimisticQFTValidation(t *testing.T) {
 	for _, input := range [][2]int{{0, 2}, {7, 0}, {7, -1}} {
-		if _, err := optimisticQFT(input[0], input[1]); err == nil {
-			t.Errorf("optimisticQFT(%d, %d) accepted invalid input", input[0], input[1])
+		if _, err := OQFTWithBlockWidth(input[0], input[1]); err == nil {
+			t.Errorf("OQFTWithBlockWidth(%d, %d) accepted invalid input", input[0], input[1])
 		}
 	}
 }
 
 func TestOptimisticQFTThreeSingleQubitBlocks(t *testing.T) {
-	c, err := optimisticQFT(3, 1)
+	c, err := OQFTWithBlockWidth(3, 1)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -124,7 +124,7 @@ func TestOQFTError(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	circuit, err := optimisticQFT(10, 3)
+	circuit, err := OQFTWithBlockWidth(10, 3)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -158,7 +158,7 @@ func TestOQFTSizingAndDepth(t *testing.T) {
 		t.Error("accepted zero qubits")
 	}
 	for n := 128; n <= 2048; n *= 2 {
-		width, err := optimisticBlockWidth(n, 0.01)
+		width, err := OQFTBlockWidth(n, 0.01)
 		if err != nil {
 			t.Fatal(err)
 		}

@@ -5,9 +5,9 @@ import (
 	"math"
 )
 
-// optimisticQFT constructs Algorithm 1 of arXiv:2505.00701 with an
-// explicit block width. Blocks are indexed in QFT traversal order.
-func optimisticQFT(n, width int) (*Circuit, error) {
+// OQFTWithBlockWidth constructs Algorithm 1 of arXiv:2505.00701 with an
+// explicit block width. Use OQFT to select a width for an error bound.
+func OQFTWithBlockWidth(n, width int) (*Circuit, error) {
 	if width < 1 {
 		return nil, fmt.Errorf("QFT block width must be positive, got %d", width)
 	}
@@ -81,17 +81,19 @@ func optimisticQFT(n, width int) (*Circuit, error) {
 // OQFT returns an optimistic QFT whose normalized squared Frobenius
 // error is bounded by eps. It uses exactly n qubits.
 func OQFT(n int, eps float64) (*Circuit, error) {
-	width, err := optimisticBlockWidth(n, eps)
+	width, err := OQFTBlockWidth(n, eps)
 	if err != nil {
 		return nil, err
 	}
 	if width >= n/2+n%2 {
 		return QFT(n)
 	}
-	return optimisticQFT(n, width)
+	return OQFTWithBlockWidth(n, width)
 }
 
-func optimisticBlockWidth(n int, eps float64) (int, error) {
+// OQFTBlockWidth returns the block width selected for the given error bound.
+// A width that leaves at most two blocks selects the exact QFT.
+func OQFTBlockWidth(n int, eps float64) (int, error) {
 	if n < 1 {
 		return 0, fmt.Errorf("circuit needs at least 1 qubit, got %d", n)
 	}

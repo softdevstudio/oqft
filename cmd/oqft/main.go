@@ -17,6 +17,7 @@ Usage:
   oqft version    print the version
   oqft gen        export a circuit as OpenQASM 3
   oqft stats      compare QFT and AQFT gate counts and depth
+  oqft check      measure per-state error against the textbook QFT
   oqft help       show this help
 
 More commands arrive phase by phase; see CLAUDE.md.
@@ -32,6 +33,8 @@ func run(args []string, stdout, stderr io.Writer) int {
 		return 2
 	}
 	switch args[0] {
+	case "check":
+		return runCheck(args[1:], stdout, stderr)
 	case "stats":
 		return runStats(args[1:], stdout, stderr)
 	case "gen":

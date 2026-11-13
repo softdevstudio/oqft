@@ -120,7 +120,7 @@ updated. Ask the owner for his go before starting each phase.
    random-basis check; failure tests that fail where predicted and only
    there.
    - [x] 3a Per-state error checker and wraparound regression test.
-   - [ ] 3b CLI, exhaustive and sampled reports, text and CSV maps.
+   - [x] 3b CLI, exhaustive and sampled reports, text and CSV maps.
    - [ ] 3c Recorded results, independent review and v0.3.0 release.
 4. [ ] Site launch: oqft.com on the Launch template. Pages About (incl. the
    name), Contact (info@oqft.com), Quick Start, Download, Reference. Posts:
@@ -146,16 +146,18 @@ hardware layout planner (arXiv:2605.15297); other optimistic circuits
 
 ## In progress
 
-### Assignment 3b: checker CLI and failure maps
-
-Add exact, sampled, and explicit-basis checks. Show binary basis indices
-and estimated-block values, squared error, and failure status in text
-and CSV. Separate per-state threshold from the OQFT mean error bound.
-
-- [x] Pull main and pass baseline tests.
-- [ ] Implement, test, and verify CI.
+Nothing. Next is assignment 3c, recorded checker results, independent review and v0.3.0.
 
 ## Done
+
+### Assignment 3b: checker CLI and failure maps (2026-11-13, Codex)
+
+oqft check supports exhaustive runs through 10 qubits and explicit or
+seeded distinct samples through 20. Text and CSV report basis bits,
+estimated block values, squared error and threshold failures. The
+diagnostic --block-width override makes wraparound visible within the
+simulator limit. CLI regression checks the neighboring interior and
+edge states in the 12-qubit, width-3 example.
 
 ### Assignment 3a: per-state error checker (2026-11-13, Codex)
 
@@ -285,5 +287,5 @@ v0.2.0 published. Phases 1 and 2 are complete.
 
 ## Gaps and to-do
 
-- Checker CLI, sampling, and failure maps remain open (3b).
+- Recorded checker results, review, and v0.3.0 remain open (3c).
 - Site repo photozeitgeist/oqft.com doesn't exist yet (needed for Phase 4).

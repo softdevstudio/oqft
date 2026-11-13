@@ -37,7 +37,7 @@ func TestCheckerValidation(t *testing.T) {
 }
 
 func TestCheckerWraparound(t *testing.T) {
-	circuit, err := optimisticQFT(12, 3)
+	circuit, err := OQFTWithBlockWidth(12, 3)
 	if err != nil {
 		t.Fatal(err)
 	}

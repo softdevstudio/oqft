@@ -111,7 +111,7 @@ updated. Ask the owner for his go before starting each phase.
    Frobenius-norm definition) below eps for every n the simulator handles;
    depth grows as log(n/eps), from recorded counts up to n = 2048. Hardest
    phase: the stuck rules apply strictly.
-   - [ ] 2a Blocked baseline and tests.
+   - [x] 2a Blocked baseline and tests.
    - [ ] 2b Optimistic commutation and phase-estimation blocks.
    - [ ] 2c Epsilon sizing, CLI, error and depth validation, and results.
    - [ ] 2d Independent review and 0.2.0 release.
@@ -143,22 +143,19 @@ hardware layout planner (arXiv:2605.15297); other optimistic circuits
 
 ## In progress
 
-### Assignment 2a: blocked QFT baseline
-
-Reviewed arXiv:2505.00701 §3 and Appendix B. The paper and targeted
-searches did not identify author reference code. Implement the blocked
-baseline with an explicit block width, dropping rotations between
-nonadjacent blocks. Keep the existing final output reversal and test
-against the textbook circuit. This baseline provides the gate ordering
-needed to test the optimistic commutation in assignment 2b.
-
-- [x] Pull main, pass baseline checks, and check for reference code.
-- [ ] Implement and test the blocked baseline.
-- [ ] Push and verify CI.
-
-Resume with the blocked baseline.
+Nothing. Next is assignment 2b, optimistic commutation and phase-estimation blocks.
 
 ## Done
+
+### Assignment 2a: blocked QFT baseline (2026-11-13, Codex)
+
+The internal blockedQFT generator retains controlled phases within and
+between neighboring blocks, following Appendix B of arXiv:2505.00701.
+The final output reversal matches QFT. Tests cover uneven blocks,
+equality with textbook QFT at two blocks, and the normalized squared
+Frobenius error bound on small circuits. Targeted searches did not
+identify author reference code; no third-party code was used.
+
 
 ### Assignment 1g: independent review and v0.1.0 (2026-11-13, Codex)
 
@@ -235,9 +232,9 @@ scripts/record-results.sh.
 
 ## State
 
-v0.1.0 published. Phase 1 is complete.
+v0.1.0 published. Phase 1 and assignment 2a are complete.
 
 ## Gaps and to-do
 
-- Phase 2, the optimistic QFT, remains open.
+- Optimistic commutation and phase-estimation blocks remain open (2b).
 - Site repo photozeitgeist/oqft.com doesn't exist yet (needed for Phase 4).

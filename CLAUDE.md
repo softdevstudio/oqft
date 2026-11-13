@@ -122,7 +122,7 @@ updated. Ask the owner for his go before starting each phase.
    - [x] 3a Per-state error checker and wraparound regression test.
    - [x] 3b CLI, exhaustive and sampled reports, text and CSV maps.
    - [x] 3c Recorded results, independent review and v0.3.0 release.
-4. [ ] Site launch: oqft.com on the Launch template. Pages About (incl. the
+4. [x] Site launch: oqft.com on the Launch template. Pages About (incl. the
    name), Contact (info@oqft.com), Quick Start, Download, Reference. Posts:
    launch, plain-language explainer of optimistic circuits, how it was
    tested, the name. Images in static/images. Footer "A SoftDevStudio.com
@@ -146,9 +146,29 @@ hardware layout planner (arXiv:2605.15297); other optimistic circuits
 
 ## In progress
 
-Nothing. Phase 4, the site launch, is next with the owner's go.
+Nothing. Phase 5, the resource estimator, is next with the owner's go.
+Split it into assignments first (handoff rule 7).
 
 ## Done
+
+### Phase 4: site launch (2026-11-13, Claude)
+
+photozeitgeist/oqft.com at b8e8091, Cloudflare Pages build green. The
+repo arrived holding a copy of the ukue.com site; all ukue posts, pages
+and images were removed, the Launch theme left untouched. config.toml:
+OQFT hero, figures (depth 198 vs 4,096 and 20x fewer gates at 2,048
+qubits, eps 0.01), CTA, menu (Quick Start, GitHub, Reference, About,
+Contact, Download). Pages: About (incl. the name and the paper credit),
+Contact, Quick Start, Download, Reference. Posts: OQFT 0.3 launch,
+optimistic circuits explainer, how it was tested, the name. Five images
+drawn into static/images from test/results numbers. Every site number
+comes from test/results (stats, optimistic-stats, check-sampled,
+check-wraparound). The site's robots rules block Claude's fetcher, so the
+post-deploy check was the Pages status only. No independent review agent
+was run on the site (owner asked for a quick pass); one can be run later.
+OQFT isn't on softdevstudio.com yet (owner limited this pass to the site
+repo).
+
 
 ### Assignment 3c: checker review and v0.3.0 (2026-11-13, Codex)
 
@@ -296,4 +316,19 @@ v0.3.0 published. Phases 1–3 are complete.
 
 ## Gaps and to-do
 
-- Site repo photozeitgeist/oqft.com doesn't exist yet (needed for Phase 4).
+- Add OQFT to softdevstudio.com (left out of the Phase 4 pass).
+- Code review notes (Claude, 2026-11-13):
+  - At eps 0.01, OQFT(n, eps) returns the exact QFT for every n up to 20,
+    so the public eps path never simulates a commuted circuit at that
+    target. The error claim for real sizes rests on the analytic bound in
+    OQFTBlockWidth plus the explicit-width tests. Worth an empirical check:
+    a test that measures mean squared error with OQFTWithBlockWidth at
+    widths 2..5 on 10 to 20 qubits and compares it with the bound's
+    prediction at those widths.
+  - The bound looks sane: width 32 at n=2048, eps=1e-4 matches the m=32
+    used in arXiv:2605.15297.
+  - OQFTWithBlockWidth slices off the last (high-low)/2 gates of QFT(k)
+    on the assumption they are its swaps. Add a test that pins that
+    layout, so a change to QFT's gate order can't break OQFT silently.
+  - Depth crosses over near 64 qubits (OQFT 103 vs QFT 64 at n=32).
+    The site says so; the CLI could warn when OQFT is deeper.

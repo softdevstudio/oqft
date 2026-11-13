@@ -95,9 +95,8 @@ updated. Ask the owner for his go before starting each phase.
      small-circuit tests pass.
    - [x] 1c Textbook QFT generator and full-unitary builder (n <= 10).
      Done when the QFT equals the DFT matrix for n = 1..10.
-   - [ ] 1d Approximate QFT generator (drops rotations below a cutoff).
-     Done when error shrinks as the cutoff rises, checked against the
-     exact QFT.
+   - [x] 1d Approximate QFT generator (drops controlled rotations beyond
+     a qubit-distance cutoff). Verified against the exact QFT.
    - [ ] 1e OpenQASM 3 export; `oqft gen --type qft|aqft -n N`. Done when
      golden-file and CLI tests pass.
    - [ ] 1f `oqft stats`; scripts/record-results.sh run; README and
@@ -140,20 +139,20 @@ hardware layout planner (arXiv:2605.15297); other optimistic circuits
 
 ## In progress
 
-### Assignment 1d: approximate QFT
-
-Use the largest retained control-target distance, measured in qubits, as
-the cutoff. Zero keeps only Hadamards and final swaps. A cutoff of n-1
-or greater keeps the textbook circuit. Reuse the textbook generator to
-keep gate ordering and basis conventions identical.
-
-- [x] Pull main and pass baseline checks.
-- [ ] Implement the cutoff and compare approximate and exact matrices.
-- [ ] Push the implementation and verify CI.
-
-Resume with the generator and its tests.
+Nothing. Next is assignment 1e, OpenQASM 3 export and the gen command.
 
 ## Done
+
+### Assignment 1d: approximate QFT (2026-11-13, Codex)
+
+`AQFT(n, cutoff)` shares the textbook generator and retains controlled
+rotations at qubit distances up to cutoff. Tests compare matrices through
+10 qubits against the exact QFT. The sum of omitted angles bounds the
+normalized Frobenius error and decreases at every cutoff. Measured error
+decreases when the previous bound is at most π and reaches zero with
+all rotations retained. At 8 qubits, measured error rises from cutoff 0
+to 1 due to phase wrapping, so global monotonicity of measured error
+does not hold.
 
 ### Assignment 1c: textbook QFT and full unitary (2026-11-13, Codex)
 
@@ -195,9 +194,9 @@ scripts/record-results.sh.
 
 ## State
 
-0.0.0. Circuit model, simulator and textbook QFT in place (1a–1c). Nothing released.
+0.0.0. Circuit model, simulator, textbook QFT and approximate QFT in place (1a–1d). Nothing released.
 
 ## Gaps and to-do
 
-- Approximate QFT remains open (1d).
+- OpenQASM export and the gen command remain open (1e).
 - Site repo photozeitgeist/oqft.com doesn't exist yet (needed for Phase 4).

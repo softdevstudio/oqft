@@ -111,6 +111,10 @@ updated. Ask the owner for his go before starting each phase.
    Frobenius-norm definition) below eps for every n the simulator handles;
    depth grows as log(n/eps), from recorded counts up to n = 2048. Hardest
    phase: the stuck rules apply strictly.
+   - [ ] 2a Blocked baseline and tests.
+   - [ ] 2b Optimistic commutation and phase-estimation blocks.
+   - [ ] 2c Epsilon sizing, CLI, error and depth validation, and results.
+   - [ ] 2d Independent review and 0.2.0 release.
 3. [ ] The checker (0.3.0): `oqft check -n N --eps E`, per-state error,
    failing states, failure map (text and CSV) showing the wraparound edges;
    random-basis check; failure tests that fail where predicted and only
@@ -139,7 +143,20 @@ hardware layout planner (arXiv:2605.15297); other optimistic circuits
 
 ## In progress
 
-Nothing. Phase 2, the optimistic QFT, is next with the owner's go.
+### Assignment 2a: blocked QFT baseline
+
+Reviewed arXiv:2505.00701 §3 and Appendix B. The paper and targeted
+searches did not identify author reference code. Implement the blocked
+baseline with an explicit block width, dropping rotations between
+nonadjacent blocks. Keep the existing final output reversal and test
+against the textbook circuit. This baseline provides the gate ordering
+needed to test the optimistic commutation in assignment 2b.
+
+- [x] Pull main, pass baseline checks, and check for reference code.
+- [ ] Implement and test the blocked baseline.
+- [ ] Push and verify CI.
+
+Resume with the blocked baseline.
 
 ## Done
 

@@ -5,8 +5,8 @@ transform**: it builds the circuit, checks it on a classical simulator, and
 works out what it saves when you count the cost of breaking RSA with
 Shor's algorithm. Website: [oqft.com](https://oqft.com).
 
-> Status: in development. The first planned release is 0.1.0. See
-> [CHANGELOG.md](CHANGELOG.md).
+Download OQFT from the [latest release](https://github.com/softdevstudio/oqft/releases/latest).
+See [CHANGELOG.md](CHANGELOG.md) for release notes.
 
 ## What it is, in plain words
 

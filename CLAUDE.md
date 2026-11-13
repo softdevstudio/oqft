@@ -141,13 +141,14 @@ hardware layout planner (arXiv:2605.15297); other optimistic circuits
 
 ### Assignment 1g: independent review and 0.1.0 release
 
-- [x] Pull main and pass baseline checks.
-- [x] Independently review the circuit library, CLI and release workflow.
-- [ ] Fix release creation so a failed publication can be retried.
-- [ ] Bump to 0.1.0, verify CI, and verify the published archives and binary.
-- [ ] Refresh recorded results and complete the handoff.
+- [x] Pass baseline checks and independently review the circuit library,
+  CLI and release workflow. The review found a release recovery issue.
+- [x] Let GitHub CLI create the tag at the tested commit during release
+  creation. Set all three version markers and update the README.
+- [ ] Verify CI, the release archives and a downloaded binary.
+- [ ] Refresh results and close the handoff.
 
-Resume with the release workflow fix.
+Resume by checking the CI and Release workflow for this commit.
 
 ## Done
 

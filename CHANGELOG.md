@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.1.0
 
 - Added the circuit model, statevector simulator and full-unitary builder.
 - Added textbook and approximate QFT generation and OpenQASM 3 export

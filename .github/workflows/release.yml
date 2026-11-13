@@ -144,9 +144,7 @@ jobs:
           if gh release view "v$v" > out.txt 2>&1; then
             gh release upload "v$v" dist/* --clobber > out.txt 2>&1 || fail "gh release upload failed"
           else
-            git tag "v$v" "${{ needs.plan.outputs.sha }}"
-            git push origin "refs/tags/v$v" > out.txt 2>&1 || fail "git push of tag v$v failed"
-            gh release create "v$v" dist/* --verify-tag \
+            gh release create "v$v" dist/* --target "${{ needs.plan.outputs.sha }}" \
               --title "OQFT v$v" --notes-file notes.md > out.txt 2>&1 || fail "gh release create failed"
           fi
           cat out.txt

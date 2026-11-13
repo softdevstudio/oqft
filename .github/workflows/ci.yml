@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: scripts/check-version.sh
+
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: stable
+      - name: gofmt
+        run: |
+          out=$(gofmt -l .)
+          if [ -n "$out" ]; then echo "::error::not gofmt-formatted: $out"; exit 1; fi
+      - run: go vet ./...
+      # Job logs can't be read from the maintainers' sessions, so failures
+      # are repeated as annotations.
+      - name: Tests
+        run: |
+          set -o pipefail
+          race=-race
+          [ "$RUNNER_OS" = Windows ] && race=
+          go test -count=1 $race -timeout 30m ./... 2>&1 | tee test.log || {
+            echo "::error::$(grep -E -- "--- FAIL|panic:|_test.go:[0-9]+:" test.log | head -120 | awk '{gsub(/%/,"%25"); printf "%s%%0A", $0}')"
+            exit 1
+          }
+      - name: Keep the test log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-log-${{ matrix.os }}
+          path: test.log

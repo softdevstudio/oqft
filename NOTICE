@@ -1,0 +1,9 @@
+Copyright 2026 SoftDevStudio.com
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+It includes third-party software listed in THIRD_PARTY_LICENSES.md.
+
+The optimistic quantum Fourier transform implemented here follows
+Kahanamoku-Meyer, Blue, Bergamaschi, Gidney and Chuang, "A log-depth
+in-place quantum Fourier transform that rarely needs ancillas",
+arXiv:2505.00701. This project is not affiliated with the authors.

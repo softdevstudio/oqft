@@ -40,6 +40,11 @@ Layout (grows phase by phase):
    owner's go.
 6. If blocked: write the blocker and the options under In progress, push,
    and stop. The other agent or the owner picks it up from there.
+7. Work in short assignments, to keep each session within usage limits.
+   When a phase starts, split it into assignments (1a, 1b, ...) in the
+   plan below before any code. One assignment per session: finish it,
+   push code with green CI, tick it here, and stop. The owner starts the
+   next one ("next assignment"). Don't run on into the next assignment.
 
 ## Workflow (low maintenance)
 
@@ -82,12 +87,22 @@ updated. Ask the owner for his go before starting each phase.
 
 0. [x] Repo setup: module, `oqft version`, CI, release workflow, this file
    and AGENTS.md. No release.
-1. [ ] Circuit core and simulator (0.1.0): circuit model (H, controlled
-   phase, swap, Z rotations), depth and gate-count reports; textbook and
-   approximate QFT generators; OpenQASM 3 export; statevector simulator
-   (n <= 20) and full-unitary builder (n <= 10). Tests: textbook QFT equals
-   the DFT matrix for n = 1..10. Commands `oqft gen --type qft|aqft -n N`,
-   `oqft stats`.
+1. [ ] Circuit core and simulator (0.1.0), in assignments:
+   - [ ] 1a Circuit model: gates H, controlled phase, swap, Z rotation;
+     circuit type; gate count and depth. Done when unit tests pass.
+   - [ ] 1b Statevector simulator (n <= 20). Done when single-gate and
+     small-circuit tests pass.
+   - [ ] 1c Textbook QFT generator and full-unitary builder (n <= 10).
+     Done when the QFT equals the DFT matrix for n = 1..10.
+   - [ ] 1d Approximate QFT generator (drops rotations below a cutoff).
+     Done when error shrinks as the cutoff rises, checked against the
+     exact QFT.
+   - [ ] 1e OpenQASM 3 export; `oqft gen --type qft|aqft -n N`. Done when
+     golden-file and CLI tests pass.
+   - [ ] 1f `oqft stats`; scripts/record-results.sh run; README and
+     CHANGELOG. Done when results are recorded in test/results.
+   - [ ] 1g Independent review and fixes; raise to 0.1.0. Done when the
+     release workflow publishes v0.1.0 and a downloaded binary is checked.
 2. [ ] The optimistic QFT (0.2.0): first check whether the paper's authors
    published code to test against (record it in NOTICE if used). Build the
    OQFT from arXiv:2505.00701: block size m from n and eps, intra-block
@@ -124,8 +139,8 @@ hardware layout planner (arXiv:2605.15297); other optimistic circuits
 
 ## In progress
 
-Nothing. Next is Phase 1, once the owner says go. Start by writing its In
-progress section here.
+Nothing. Next is assignment 1a, once the owner says go ("next
+assignment"). Start by writing its In progress section here.
 
 ## Done
 
@@ -146,4 +161,4 @@ scripts/record-results.sh.
 
 - Site repo photozeitgeist/oqft.com doesn't exist yet (needed for Phase 4).
 - The language (Go) was set from the plan's recommendation; the owner can
-  still change it before Phase 1 starts.
+  still change it before assignment 1a starts.

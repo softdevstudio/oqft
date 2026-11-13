@@ -140,8 +140,18 @@ hardware layout planner (arXiv:2605.15297); other optimistic circuits
 
 ## In progress
 
-Nothing. Next is assignment 1b (statevector simulator), once the owner
-says "next assignment". Start by writing its In progress section here.
+### Assignment 1b: statevector simulator
+
+Simulate circuits on up to 20 qubits using complex128 amplitudes.
+Qubit 0 is the least significant basis-index bit. Provide a basis-state
+entry point and in-place evolution for arbitrary input vectors. Validate
+circuit sizes, gate operands, and input sizes before mutating amplitudes.
+
+- [x] Pull main and run the baseline tests with Go 1.24.7.
+- [ ] Implement the four gates and test each one, plus a small circuit.
+- [ ] Run checks, push the implementation, and verify CI.
+
+Resume with the simulator implementation and tests.
 
 ## Done
 

@@ -47,3 +47,17 @@ func TestGenHelp(t *testing.T) {
 		t.Fatalf("exit %d, stdout %q, help %q", code, &out, &help)
 	}
 }
+
+func TestGenOptimistic(t *testing.T) {
+	var out, diagnostics bytes.Buffer
+	if code := run([]string{"gen", "--type", "oqft", "-n", "128", "--eps", "0.01"}, &out, &diagnostics); code != 0 ||
+		!strings.Contains(out.String(), "qubit[128] q;") ||
+		!strings.Contains(out.String(), "cp(-") || diagnostics.Len() != 0 {
+		t.Fatalf("exit %d, stderr %q, output length %d", code, &diagnostics, out.Len())
+	}
+	out.Reset()
+	if code := run([]string{"gen", "--type", "oqft", "-n", "4", "--eps", "NaN"}, &out, &diagnostics); code != 2 ||
+		out.Len() != 0 || !strings.Contains(diagnostics.String(), "epsilon") {
+		t.Fatalf("exit %d, stdout %q, stderr %q", code, &out, &diagnostics)
+	}
+}

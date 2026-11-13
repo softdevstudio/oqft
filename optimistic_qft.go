@@ -77,3 +77,48 @@ func optimisticQFT(n, width int) (*Circuit, error) {
 	}
 	return c, nil
 }
+
+// OQFT returns an optimistic QFT whose normalized squared Frobenius
+// error is bounded by eps. It uses exactly n qubits.
+func OQFT(n int, eps float64) (*Circuit, error) {
+	width, err := optimisticBlockWidth(n, eps)
+	if err != nil {
+		return nil, err
+	}
+	if width >= n/2+n%2 {
+		return QFT(n)
+	}
+	return optimisticQFT(n, width)
+}
+
+func optimisticBlockWidth(n int, eps float64) (int, error) {
+	if n < 1 {
+		return 0, fmt.Errorf("circuit needs at least 1 qubit, got %d", n)
+	}
+	if !(eps > 0 && eps <= 1) {
+		return 0, fmt.Errorf("epsilon must be in (0, 1], got %g", eps)
+	}
+
+	exactWidth := n/2 + n%2
+	for width := 1; width < exactWidth; width++ {
+		blocks := (n-1)/width + 1
+		commutations := (blocks - 1) / 2
+		// Appendix B bounds truncation error. For each commutation, a
+		// signed cyclic phase-estimation offset of magnitude d has
+		// probability at most 1/d² (including d=1). Averaged over the
+		// block input, it wraps on a fraction d/2^width of inputs.
+		// A wrap costs at most 4 in squared distance; otherwise the
+		// cost is at most (2πd/2^width)². Summing over both signs gives
+		// the bound below. The shorter leading block is never estimated.
+		// Round the logarithmic bound upward to avoid subnormal products.
+		truncation := 4 * math.Pi * math.Pi * float64(blocks) / 3
+		commutation := 4*math.Pi*math.Pi + 8*(1+float64(width)*math.Ln2)
+		// Apply the triangle inequality before squaring.
+		scale := math.Sqrt(truncation) + float64(commutations)*math.Sqrt(commutation)
+		logBound := math.Nextafter(2*math.Log2(scale)-float64(width), math.Inf(1))
+		if logBound <= math.Log2(eps) {
+			return width, nil
+		}
+	}
+	return exactWidth, nil
+}

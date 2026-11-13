@@ -11,11 +11,12 @@ import (
 func runGen(args []string, stdout, stderr io.Writer) int {
 	flags := flag.NewFlagSet("oqft gen", flag.ContinueOnError)
 	flags.SetOutput(stderr)
-	kind := flags.String("type", "qft", "circuit type (qft or aqft)")
+	kind := flags.String("type", "qft", "circuit type (qft, aqft or oqft)")
 	n := flags.Int("n", 0, "number of qubits (required)")
 	cutoff := flags.Int("cutoff", defaultCutoff, "maximum distance between qubits for AQFT rotations")
+	eps := flags.Float64("eps", defaultEpsilon, "normalized squared Frobenius error bound for OQFT")
 	flags.Usage = func() {
-		fmt.Fprintln(flags.Output(), "Usage: oqft gen --type qft|aqft -n N [--cutoff K]")
+		fmt.Fprintln(flags.Output(), "Usage: oqft gen --type qft|aqft|oqft -n N [--cutoff K] [--eps E]")
 		flags.PrintDefaults()
 	}
 	if err := flags.Parse(args); err != nil {
@@ -40,6 +41,8 @@ func runGen(args []string, stdout, stderr io.Writer) int {
 		circuit, err = oqft.QFT(*n)
 	case "aqft":
 		circuit, err = oqft.AQFT(*n, *cutoff)
+	case "oqft":
+		circuit, err = oqft.OQFT(*n, *eps)
 	default:
 		fmt.Fprintf(stderr, "oqft gen: unknown circuit type %q\n", *kind)
 		return 2

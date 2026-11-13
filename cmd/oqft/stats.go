@@ -9,13 +9,16 @@ import (
 	"github.com/softdevstudio/oqft"
 )
 
+const defaultEpsilon = 0.01
+
 func runStats(args []string, stdout, stderr io.Writer) int {
 	flags := flag.NewFlagSet("oqft stats", flag.ContinueOnError)
 	flags.SetOutput(stderr)
 	n := flags.Int("n", 0, "number of qubits (required)")
 	cutoff := flags.Int("cutoff", defaultCutoff, "maximum distance between qubits for AQFT rotations")
+	eps := flags.Float64("eps", defaultEpsilon, "add an OQFT comparison at this error bound when specified")
 	flags.Usage = func() {
-		fmt.Fprintln(flags.Output(), "Usage: oqft stats -n N [--cutoff K]")
+		fmt.Fprintln(flags.Output(), "Usage: oqft stats -n N [--cutoff K] [--eps E]")
 		flags.PrintDefaults()
 	}
 	if err := flags.Parse(args); err != nil {
@@ -39,7 +42,23 @@ func runStats(args []string, stdout, stderr io.Writer) int {
 		fmt.Fprintf(stderr, "oqft stats: %v\n", err)
 		return 2
 	}
-	if _, err := io.WriteString(stdout, statsReport(exact, approx, *cutoff)); err != nil {
+	report := statsReport(exact, approx, *cutoff)
+	var includeOptimistic bool
+	flags.Visit(func(f *flag.Flag) {
+		if f.Name == "eps" {
+			includeOptimistic = true
+		}
+	})
+	if includeOptimistic {
+		circuit, err := oqft.OQFT(*n, *eps)
+		if err != nil {
+			fmt.Fprintf(stderr, "oqft stats: %v\n", err)
+			return 2
+		}
+		report += fmt.Sprintf("OQFT epsilon: %g, total gates: %d, two-qubit gates: %d, depth: %d\n",
+			*eps, circuit.Len(), circuit.TwoQubit(), circuit.Depth())
+	}
+	if _, err := io.WriteString(stdout, report); err != nil {
 		fmt.Fprintf(stderr, "oqft stats: %v\n", err)
 		return 1
 	}

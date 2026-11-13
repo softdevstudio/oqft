@@ -95,3 +95,78 @@ func TestOptimisticQFTThreeSingleQubitBlocks(t *testing.T) {
 		}
 	}
 }
+
+func TestOQFTError(t *testing.T) {
+	for n := 1; n <= MaxUnitaryQubits; n++ {
+		exact, err := QFT(n)
+		if err != nil {
+			t.Fatal(err)
+		}
+		circuit, err := OQFT(n, 0.01)
+		if err != nil {
+			t.Fatal(err)
+		}
+		for basis := 0; basis < 1<<n; basis++ {
+			got, err := circuit.Simulate(basis)
+			if err != nil {
+				t.Fatal(err)
+			}
+			want, err := exact.Simulate(basis)
+			if err != nil {
+				t.Fatal(err)
+			}
+			checkAmplitudes(t, got, want)
+		}
+	}
+	// Exercise a genuinely commuted circuit and compare to the exact QFT.
+	exact, err := QFT(10)
+	if err != nil {
+		t.Fatal(err)
+	}
+	circuit, err := optimisticQFT(10, 3)
+	if err != nil {
+		t.Fatal(err)
+	}
+	var squaredError float64
+	for basis := 0; basis < 1<<10; basis++ {
+		got, err := circuit.Simulate(basis)
+		if err != nil {
+			t.Fatal(err)
+		}
+		want, err := exact.Simulate(basis)
+		if err != nil {
+			t.Fatal(err)
+		}
+		for i, value := range got {
+			delta := cmplx.Abs(value - want[i])
+			squaredError += delta * delta
+		}
+	}
+	if distance := squaredError / (1 << 10); !(distance > 0 && distance < 0.25) {
+		t.Fatalf("explicit-width normalized squared error = %g", distance)
+	}
+}
+
+func TestOQFTSizingAndDepth(t *testing.T) {
+	for _, eps := range []float64{0, -1, 2, math.NaN(), math.Inf(1)} {
+		if _, err := OQFT(4, eps); err == nil {
+			t.Errorf("accepted epsilon %g", eps)
+		}
+	}
+	if _, err := OQFT(0, 0.01); err == nil {
+		t.Error("accepted zero qubits")
+	}
+	for n := 128; n <= 2048; n *= 2 {
+		width, err := optimisticBlockWidth(n, 0.01)
+		if err != nil {
+			t.Fatal(err)
+		}
+		circuit, err := OQFT(n, 0.01)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if width >= n/2 || circuit.Depth() > 11*width || circuit.Depth() >= 2*n {
+			t.Fatalf("%d qubits: block width %d, depth %d", n, width, circuit.Depth())
+		}
+	}
+}

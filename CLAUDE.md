@@ -145,13 +145,11 @@ hardware layout planner (arXiv:2605.15297); other optimistic circuits
 
 ### Assignment 2c: epsilon sizing, CLI and validation
 
-Use a conservative bound on the normalized squared Frobenius error.
-Choose the first block width that meets it, with an exact path when two
-blocks suffice. Expose OQFT in gen and add reproducible depth results.
+- [x] Implement conservative epsilon sizing, add CLI support, and pass
+  the local error, depth and CLI checks.
+- [ ] Record results from this commit, push them, and verify CI.
 
-- [x] Pull main and run baseline tests.
-- [ ] Implement and test sizing and the CLI.
-- [ ] Push code, record results from that commit, and verify CI.
+Resume by running scripts/record-results.sh at this commit.
 
 ## Done
 

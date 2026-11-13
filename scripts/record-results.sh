@@ -19,4 +19,10 @@ go test -count=1 -v ./... 2>&1 | tee test/results/tests.txt
     echo
   done
 } > test/results/stats.txt
+{
+  for qubits in 32 64 128 256 512 1024 2048; do
+    go run ./cmd/oqft stats -n "$qubits" --cutoff 2 --eps 0.01
+    echo
+  done
+} > test/results/optimistic-stats.txt
 echo "recorded to test/results"

@@ -140,8 +140,19 @@ hardware layout planner (arXiv:2605.15297); other optimistic circuits
 
 ## In progress
 
-Nothing. Next is assignment 1c, the textbook QFT generator and
-full-unitary builder. Use Simulate to generate columns in basis order.
+### Assignment 1c: textbook QFT and full unitary
+
+Generate the positive-sign QFT, ending with swaps so input and output
+indices both use the simulator's basis order. Build the full matrix for
+circuits of up to 10 qubits, with output indices as rows and input
+indices as columns.
+
+- [x] Pull main and pass baseline checks.
+- [ ] Implement the circuit and matrix builder, then compare every
+  matrix element against the analytic DFT for 1 through 10 qubits.
+- [ ] Push the implementation and verify CI.
+
+Resume with the generator and matrix builder.
 
 ## Done
 

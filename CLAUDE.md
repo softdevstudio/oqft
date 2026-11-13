@@ -143,7 +143,19 @@ hardware layout planner (arXiv:2605.15297); other optimistic circuits
 
 ## In progress
 
-Nothing. Next is assignment 2b, optimistic commutation and phase-estimation blocks.
+### Assignment 2b: optimistic commutation
+
+Implement the five stages of Algorithm 1 with explicit block width.
+Number blocks in textbook traversal order, from the high end of the
+register. Use local QFTs without swaps, inverse stages in reverse gate
+order, and one final whole-register reversal. Keep epsilon sizing and
+CLI integration for 2c.
+
+- [x] Pull main and pass baseline tests.
+- [ ] Implement and verify the explicit-width circuit.
+- [ ] Push and verify CI.
+
+Resume with the five-stage circuit.
 
 ## Done
 

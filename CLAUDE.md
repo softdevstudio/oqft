@@ -23,7 +23,9 @@ Layout (grows phase by phase):
   agree (scripts/check-version.sh, run in CI).
 - `cmd/oqft` is the CLI. Library code lives in the root package `oqft`
   until it is big enough to split into `internal/` packages.
-- `scripts/record-results.sh` writes `test/results/`.
+- `scripts/record-results.sh` writes `test/results/`;
+  `scripts/record-case-studies.sh` writes the numbers behind the site's
+  case studies; `examples/qiskit` holds the Qiskit loading example.
 
 ## Handoff rules (Claude and ChatGPT/Codex)
 
@@ -150,6 +152,19 @@ Nothing. Phase 5, the resource estimator, is next with the owner's go.
 Split it into assignments first (handoff rule 7).
 
 ## Done
+
+### Site case studies and use examples (2026-11-13, Claude)
+
+At the owner's word: scripts/record-case-studies.sh records the runs
+behind the oqft.com case studies and use examples to
+test/results/case-studies.txt (depth and gate crossover from 32 to 128
+qubits, error targets at 2,048 qubits with block widths from
+scripts/blockwidths, measured error by block width on 16 qubits, a batch
+table). examples/qiskit/load_oqft.py loads oqft output into Qiskit;
+its output is test/results/qiskit-load.txt (needs Python with qiskit and
+qiskit_qasm3_import; not run in CI). Re-run both after any change that
+could move a number, then update the site posts. OQFT added to
+softdevstudio.com with a note.
 
 ### Phase 4: site launch (2026-11-13, Claude)
 
@@ -316,7 +331,6 @@ v0.3.0 published. Phases 1–3 are complete.
 
 ## Gaps and to-do
 
-- Add OQFT to softdevstudio.com (left out of the Phase 4 pass).
 - Code review notes (Claude, 2026-11-13):
   - At eps 0.01, OQFT(n, eps) returns the exact QFT for every n up to 20,
     so the public eps path never simulates a commuted circuit at that

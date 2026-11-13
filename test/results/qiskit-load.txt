@@ -1,0 +1,5 @@
+6-qubit oqft QFT equals Qiskit's QFT matrix: True
+256-qubit OQFT loaded in 30 s: {'cp': 9400, 'h': 496, 'swap': 128}, depth 158
+OQFT after transpile: cx 19184, depth 624
+Qiskit textbook QFT after transpile: cx 19224, depth 2044
+qiskit 2.6.2

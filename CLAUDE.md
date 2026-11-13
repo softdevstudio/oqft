@@ -97,7 +97,7 @@ updated. Ask the owner for his go before starting each phase.
      Done when the QFT equals the DFT matrix for n = 1..10.
    - [x] 1d Approximate QFT generator (drops controlled rotations beyond
      a qubit-distance cutoff). Verified against the exact QFT.
-   - [ ] 1e OpenQASM 3 export; `oqft gen --type qft|aqft -n N`. Done when
+   - [x] 1e OpenQASM 3 export; `oqft gen --type qft|aqft -n N`. Done when
      golden-file and CLI tests pass.
    - [ ] 1f `oqft stats`; scripts/record-results.sh run; README and
      CHANGELOG. Done when results are recorded in test/results.
@@ -139,19 +139,17 @@ hardware layout planner (arXiv:2605.15297); other optimistic circuits
 
 ## In progress
 
-### Assignment 1e: OpenQASM 3 export
-
-Export validated circuits with stdgates.inc and round-trippable angles.
-Add gen with required -n, textbook QFT by default, and a rotation
-cutoff for AQFT. Test the output and CLI errors.
-
-- [x] Pull main and check baseline.
-- [ ] Implement and test the exporter and command.
-- [ ] Push and verify CI.
-
-Resume with the exporter and CLI.
+Nothing. Next is assignment 1f, stats, recorded results and documentation.
 
 ## Done
+
+### Assignment 1e: OpenQASM 3 export (2026-11-13, Codex)
+
+`Circuit.OpenQASM()` validates and exports circuits with stdgates.inc.
+`oqft gen -n N` defaults to textbook QFT. With `--type aqft`, the
+optional `--cutoff K` defaults to 2. The command writes the program to
+stdout. Golden-file and CLI tests cover syntax, both circuit types,
+the cutoff, help and invalid arguments.
 
 ### Assignment 1d: approximate QFT (2026-11-13, Codex)
 
@@ -204,9 +202,9 @@ scripts/record-results.sh.
 
 ## State
 
-0.0.0. Circuit model, simulator, textbook QFT and approximate QFT in place (1a–1d). Nothing released.
+0.0.0. Circuit model, simulator, QFT, AQFT and OpenQASM export in place (1a–1e). Nothing released.
 
 ## Gaps and to-do
 
-- OpenQASM export and the gen command remain open (1e).
+- Circuit statistics and recorded results remain open (1f).
 - Site repo photozeitgeist/oqft.com doesn't exist yet (needed for Phase 4).

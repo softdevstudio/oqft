@@ -112,7 +112,7 @@ updated. Ask the owner for his go before starting each phase.
    depth grows as log(n/eps), from recorded counts up to n = 2048. Hardest
    phase: the stuck rules apply strictly.
    - [x] 2a Blocked baseline and tests.
-   - [ ] 2b Optimistic commutation and phase-estimation blocks.
+   - [x] 2b Optimistic commutation and phase-estimation blocks.
    - [ ] 2c Epsilon sizing, CLI, error and depth validation, and results.
    - [ ] 2d Independent review and 0.2.0 release.
 3. [ ] The checker (0.3.0): `oqft check -n N --eps E`, per-state error,
@@ -143,21 +143,18 @@ hardware layout planner (arXiv:2605.15297); other optimistic circuits
 
 ## In progress
 
-### Assignment 2b: optimistic commutation
-
-Implement the five stages of Algorithm 1 with explicit block width.
-Number blocks in textbook traversal order, from the high end of the
-register. Use local QFTs without swaps, inverse stages in reverse gate
-order, and one final whole-register reversal. Keep epsilon sizing and
-CLI integration for 2c.
-
-- [x] Pull main and pass baseline tests.
-- [ ] Implement and verify the explicit-width circuit.
-- [ ] Push and verify CI.
-
-Resume with the five-stage circuit.
+Nothing. Next is assignment 2c, epsilon sizing, CLI integration and validation.
 
 ## Done
+
+### Assignment 2b: optimistic commutation (2026-11-13, Codex)
+
+The internal optimisticQFT generator implements Algorithm 1 with an
+explicit width, using the same partition as blockedQFT and numbering
+blocks in descending qubit order. It uses local QFTs in reversed wire
+order, inverse local QFTs for phase estimation, and a final global
+reversal. Tests compare the full matrix to the blocked baseline for
+small circuits and check fixed-width depth through 2048 qubits.
 
 ### Assignment 2a: blocked QFT baseline (2026-11-13, Codex)
 
@@ -244,9 +241,9 @@ scripts/record-results.sh.
 
 ## State
 
-v0.1.0 published. Phase 1 and assignment 2a are complete.
+v0.1.0 published. Phase 1 and assignments 2a–2b are complete.
 
 ## Gaps and to-do
 
-- Optimistic commutation and phase-estimation blocks remain open (2b).
+- Epsilon sizing, CLI integration, and results remain open (2c).
 - Site repo photozeitgeist/oqft.com doesn't exist yet (needed for Phase 4).

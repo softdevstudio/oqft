@@ -139,7 +139,15 @@ hardware layout planner (arXiv:2605.15297); other optimistic circuits
 
 ## In progress
 
-Nothing. Next is assignment 1g, independent review and the 0.1.0 release.
+### Assignment 1g: independent review and 0.1.0 release
+
+- [x] Pull main and pass baseline checks.
+- [x] Independently review the circuit library, CLI and release workflow.
+- [ ] Fix release creation so a failed publication can be retried.
+- [ ] Bump to 0.1.0, verify CI, and verify the published archives and binary.
+- [ ] Refresh recorded results and complete the handoff.
+
+Resume with the release workflow fix.
 
 ## Done
 

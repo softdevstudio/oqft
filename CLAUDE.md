@@ -140,8 +140,32 @@ hardware layout planner (arXiv:2605.15297); other optimistic circuits
 
 ## In progress
 
-Nothing. Next is assignment 1a, once the owner says go ("next
-assignment"). Start by writing its In progress section here.
+### Assignment 1a: circuit model (Claude, started 2026-11-13)
+
+What and why: every later piece (simulator, generators, QASM export,
+stats, OQFT) works on one circuit type, so it comes first.
+
+Design decisions:
+- File `circuit.go` in the root package `oqft`.
+- `GateKind`: `H`, `CPhase`, `Swap`, `RZ`. Names match OpenQASM 3
+  (`h`, `cp`, `swap`, `rz`) so 1e can print them directly.
+- `Gate{Kind, Q0, Q1, Angle}`. Q1 is used by two-qubit gates only (for
+  `CPhase` Q0 is control, Q1 target; the gate is symmetric anyway). Angle
+  in radians, used by `CPhase` and `RZ`.
+- `Circuit{N, Gates}`. `NewCircuit(n)` rejects n < 1. `Add(Gate) error`
+  validates (qubits in range, two-qubit gates on distinct qubits, angle
+  finite, no angle on H/Swap) for input from outside; the helpers `H`,
+  `CP`, `Swap`, `RZ` call it and panic on error, for generator code where
+  a bad gate is a bug.
+- `Counts()` per kind, `Len()`, `TwoQubit()`, `Depth()`: ASAP layering,
+  each gate starts after the latest earlier gate on any of its qubits.
+  Every gate counts as one layer (no gate costs yet).
+
+Steps:
+1. [ ] circuit.go and circuit_test.go
+2. [ ] gofmt, vet, race tests; push; CI green; tick 1a in the plan
+
+Resume at: step 1.
 
 ## Done
 

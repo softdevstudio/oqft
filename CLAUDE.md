@@ -88,7 +88,7 @@ updated. Ask the owner for his go before starting each phase.
 
 0. [x] Repo setup: module, `oqft version`, CI, release workflow, this file
    and AGENTS.md. No release.
-1. [ ] Circuit core and simulator (0.1.0), in assignments:
+1. [x] Circuit core and simulator (0.1.0), in assignments:
    - [x] 1a Circuit model: gates H, controlled phase, swap, Z rotation;
      circuit type; gate count and depth. Done when unit tests pass.
    - [x] 1b Statevector simulator (n <= 20). Done when single-gate and
@@ -101,7 +101,7 @@ updated. Ask the owner for his go before starting each phase.
      golden-file and CLI tests pass.
    - [x] 1f `oqft stats`; scripts/record-results.sh run; README and
      CHANGELOG. Done when results are recorded in test/results.
-   - [ ] 1g Independent review and fixes; raise to 0.1.0. Done when the
+   - [x] 1g Independent review and fixes; raise to 0.1.0. Done when the
      release workflow publishes v0.1.0 and a downloaded binary is checked.
 2. [ ] The optimistic QFT (0.2.0): first check whether the paper's authors
    published code to test against (record it in NOTICE if used). Build the
@@ -139,18 +139,18 @@ hardware layout planner (arXiv:2605.15297); other optimistic circuits
 
 ## In progress
 
-### Assignment 1g: independent review and 0.1.0 release
-
-- [x] Pass baseline checks and independently review the circuit library,
-  CLI and release workflow. The review found a release recovery issue.
-- [x] Let GitHub CLI create the tag at the tested commit during release
-  creation. Set all three version markers and update the README.
-- [ ] Verify CI, the release archives and a downloaded binary.
-- [ ] Refresh results and close the handoff.
-
-Resume by checking the CI and Release workflow for this commit.
+Nothing. Phase 2, the optimistic QFT, is next with the owner's go.
 
 ## Done
+
+### Assignment 1g: independent review and v0.1.0 (2026-11-13, Codex)
+
+Independent review covered the circuit core, simulator, generators, CLI
+and release workflow. Release creation now lets GitHub CLI create the
+tag at the tested commit. CI and Release passed at 46a74b0. All five
+published archives matched SHA256SUMS, and the downloaded Linux amd64
+binary passed version, gen and stats smoke checks. Results were recorded
+from the released commit.
 
 ### Assignment 1f: stats and recorded results (2026-11-13, Codex)
 
@@ -218,9 +218,9 @@ scripts/record-results.sh.
 
 ## State
 
-0.0.0. Circuit model, simulator, QFT, AQFT, OpenQASM export and stats in place (1a–1f). Nothing released.
+v0.1.0 published. Phase 1 is complete.
 
 ## Gaps and to-do
 
-- Independent review and the 0.1.0 release remain open (1g).
+- Phase 2, the optimistic QFT, remains open.
 - Site repo photozeitgeist/oqft.com doesn't exist yet (needed for Phase 4).

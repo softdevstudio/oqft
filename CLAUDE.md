@@ -139,7 +139,17 @@ hardware layout planner (arXiv:2605.15297); other optimistic circuits
 
 ## In progress
 
-Nothing. Next is assignment 1e, OpenQASM 3 export and the gen command.
+### Assignment 1e: OpenQASM 3 export
+
+Export validated circuits with stdgates.inc and round-trippable angles.
+Add gen with required -n, textbook QFT by default, and a rotation
+cutoff for AQFT. Test the output and CLI errors.
+
+- [x] Pull main and check baseline.
+- [ ] Implement and test the exporter and command.
+- [ ] Push and verify CI.
+
+Resume with the exporter and CLI.
 
 ## Done
 

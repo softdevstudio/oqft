@@ -115,13 +115,13 @@ updated. Ask the owner for his go before starting each phase.
    - [x] 2b Optimistic commutation and phase-estimation blocks.
    - [x] 2c Epsilon sizing, CLI, error and depth validation, and results.
    - [x] 2d Independent review and 0.2.0 release.
-3. [ ] The checker (0.3.0): `oqft check -n N --eps E`, per-state error,
+3. [x] The checker (0.3.0): `oqft check -n N --eps E`, per-state error,
    failing states, failure map (text and CSV) showing the wraparound edges;
    random-basis check; failure tests that fail where predicted and only
    there.
    - [x] 3a Per-state error checker and wraparound regression test.
    - [x] 3b CLI, exhaustive and sampled reports, text and CSV maps.
-   - [ ] 3c Recorded results, independent review and v0.3.0 release.
+   - [x] 3c Recorded results, independent review and v0.3.0 release.
 4. [ ] Site launch: oqft.com on the Launch template. Pages About (incl. the
    name), Contact (info@oqft.com), Quick Start, Download, Reference. Posts:
    launch, plain-language explainer of optimistic circuits, how it was
@@ -146,15 +146,18 @@ hardware layout planner (arXiv:2605.15297); other optimistic circuits
 
 ## In progress
 
-### Assignment 3c: checker results and v0.3.0
-
-- [x] Complete independent review and make --basis parse decimal.
-- [x] Document the checker, extend the recorder, and set version 0.3.0.
-- [ ] Verify CI, publication and archives, and record results.
-
-Resume with the release workflow and recorder.
+Nothing. Phase 4, the site launch, is next with the owner's go.
 
 ## Done
+
+### Assignment 3c: checker review and v0.3.0 (2026-11-13, Codex)
+
+Independent review found no release blockers. Made --basis consistently
+parse decimal and added a regression for leading zeros. Documented
+thresholds and diagnostic sizing and recorded exhaustive, sampled and
+wraparound reports from the release commit. CI and Release passed at
+29d5ee4. All five archives matched SHA256SUMS, and the downloaded
+Linux amd64 binary passed version, exhaustive and CSV wraparound checks.
 
 ### Assignment 3b: checker CLI and failure maps (2026-11-13, Codex)
 
@@ -289,9 +292,8 @@ scripts/record-results.sh.
 
 ## State
 
-v0.2.0 published. Phases 1 and 2 are complete.
+v0.3.0 published. Phases 1–3 are complete.
 
 ## Gaps and to-do
 
-- Recorded checker results, review, and v0.3.0 remain open (3c).
 - Site repo photozeitgeist/oqft.com doesn't exist yet (needed for Phase 4).

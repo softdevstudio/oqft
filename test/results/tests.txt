@@ -1,7 +1,7 @@
 === RUN   TestAQFTGateCutoff
 --- PASS: TestAQFTGateCutoff (0.00s)
 === RUN   TestAQFTErrorBoundDecreases
---- PASS: TestAQFTErrorBoundDecreases (0.91s)
+--- PASS: TestAQFTErrorBoundDecreases (1.01s)
 === RUN   TestAQFTValidation
 --- PASS: TestAQFTValidation (0.00s)
 === RUN   TestBlockedQFTGateOrder
@@ -10,6 +10,12 @@
 --- PASS: TestBlockedQFTAgainstTextbook (0.00s)
 === RUN   TestBlockedQFTValidation
 --- PASS: TestBlockedQFTValidation (0.00s)
+=== RUN   TestCheckerStateError
+--- PASS: TestCheckerStateError (0.00s)
+=== RUN   TestCheckerValidation
+--- PASS: TestCheckerValidation (0.00s)
+=== RUN   TestCheckerWraparound
+--- PASS: TestCheckerWraparound (0.00s)
 === RUN   TestNewCircuit
 --- PASS: TestNewCircuit (0.00s)
 === RUN   TestKindNames
@@ -35,11 +41,11 @@
 === RUN   TestOptimisticQFTThreeSingleQubitBlocks
 --- PASS: TestOptimisticQFTThreeSingleQubitBlocks (0.00s)
 === RUN   TestOQFTError
---- PASS: TestOQFTError (0.29s)
+--- PASS: TestOQFTError (0.32s)
 === RUN   TestOQFTSizingAndDepth
 --- PASS: TestOQFTSizingAndDepth (0.04s)
 === RUN   TestOQFTSelectedWidthSampleError
---- PASS: TestOQFTSelectedWidthSampleError (0.37s)
+--- PASS: TestOQFTSelectedWidthSampleError (0.42s)
 === RUN   TestQFTMatchesDFT
 === RUN   TestQFTMatchesDFT/1
 === RUN   TestQFTMatchesDFT/2
@@ -51,7 +57,7 @@
 === RUN   TestQFTMatchesDFT/8
 === RUN   TestQFTMatchesDFT/9
 === RUN   TestQFTMatchesDFT/10
---- PASS: TestQFTMatchesDFT (0.13s)
+--- PASS: TestQFTMatchesDFT (0.14s)
     --- PASS: TestQFTMatchesDFT/1 (0.00s)
     --- PASS: TestQFTMatchesDFT/2 (0.00s)
     --- PASS: TestQFTMatchesDFT/3 (0.00s)
@@ -59,9 +65,9 @@
     --- PASS: TestQFTMatchesDFT/5 (0.00s)
     --- PASS: TestQFTMatchesDFT/6 (0.00s)
     --- PASS: TestQFTMatchesDFT/7 (0.00s)
-    --- PASS: TestQFTMatchesDFT/8 (0.00s)
+    --- PASS: TestQFTMatchesDFT/8 (0.01s)
     --- PASS: TestQFTMatchesDFT/9 (0.02s)
-    --- PASS: TestQFTMatchesDFT/10 (0.10s)
+    --- PASS: TestQFTMatchesDFT/10 (0.11s)
 === RUN   TestUnitaryBasisOrder
 --- PASS: TestUnitaryBasisOrder (0.00s)
 === RUN   TestQFTAndUnitaryValidation
@@ -93,9 +99,15 @@
 === RUN   TestEvolve
 --- PASS: TestEvolve (0.00s)
 === RUN   TestSimulationValidation
---- PASS: TestSimulationValidation (0.02s)
+--- PASS: TestSimulationValidation (0.01s)
 PASS
-ok  	github.com/softdevstudio/oqft	1.801s
+ok  	github.com/softdevstudio/oqft	1.981s
+=== RUN   TestCheckCLI
+--- PASS: TestCheckCLI (0.00s)
+=== RUN   TestCheckWraparoundMap
+--- PASS: TestCheckWraparoundMap (0.00s)
+=== RUN   TestCheckInvalidArguments
+--- PASS: TestCheckInvalidArguments (0.00s)
 === RUN   TestGen
 --- PASS: TestGen (0.00s)
 === RUN   TestGenErrors
@@ -113,4 +125,4 @@ ok  	github.com/softdevstudio/oqft	1.801s
 === RUN   TestStatsArguments
 --- PASS: TestStatsArguments (0.00s)
 PASS
-ok  	github.com/softdevstudio/oqft/cmd/oqft	0.004s
+ok  	github.com/softdevstudio/oqft/cmd/oqft	0.007s

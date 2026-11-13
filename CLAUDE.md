@@ -140,7 +140,18 @@ hardware layout planner (arXiv:2605.15297); other optimistic circuits
 
 ## In progress
 
-Nothing. Next is assignment 1d, the approximate QFT generator.
+### Assignment 1d: approximate QFT
+
+Use the largest retained control-target distance, measured in qubits, as
+the cutoff. Zero keeps only Hadamards and final swaps. A cutoff of n-1
+or greater keeps the textbook circuit. Reuse the textbook generator to
+keep gate ordering and basis conventions identical.
+
+- [x] Pull main and pass baseline checks.
+- [ ] Implement the cutoff and compare approximate and exact matrices.
+- [ ] Push the implementation and verify CI.
+
+Resume with the generator and its tests.
 
 ## Done
 

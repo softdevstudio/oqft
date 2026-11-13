@@ -82,7 +82,8 @@ Layout (grows phase by phase):
 ## Plan
 
 From the owner's dev plan of 2026-11-13; he started the project by creating
-this repo. Each phase fits one session and ends with green CI and this file
+this repo. Each phase is split into short assignments (handoff rule 7);
+each ends with green CI and this file
 updated. Ask the owner for his go before starting each phase.
 
 0. [x] Repo setup: module, `oqft version`, CI, release workflow, this file

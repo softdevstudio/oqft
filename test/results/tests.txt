@@ -1,7 +1,7 @@
 === RUN   TestAQFTGateCutoff
 --- PASS: TestAQFTGateCutoff (0.00s)
 === RUN   TestAQFTErrorBoundDecreases
---- PASS: TestAQFTErrorBoundDecreases (1.00s)
+--- PASS: TestAQFTErrorBoundDecreases (0.91s)
 === RUN   TestAQFTValidation
 --- PASS: TestAQFTValidation (0.00s)
 === RUN   TestBlockedQFTGateOrder
@@ -35,9 +35,11 @@
 === RUN   TestOptimisticQFTThreeSingleQubitBlocks
 --- PASS: TestOptimisticQFTThreeSingleQubitBlocks (0.00s)
 === RUN   TestOQFTError
---- PASS: TestOQFTError (0.30s)
+--- PASS: TestOQFTError (0.29s)
 === RUN   TestOQFTSizingAndDepth
 --- PASS: TestOQFTSizingAndDepth (0.04s)
+=== RUN   TestOQFTSelectedWidthSampleError
+--- PASS: TestOQFTSelectedWidthSampleError (0.37s)
 === RUN   TestQFTMatchesDFT
 === RUN   TestQFTMatchesDFT/1
 === RUN   TestQFTMatchesDFT/2
@@ -91,9 +93,9 @@
 === RUN   TestEvolve
 --- PASS: TestEvolve (0.00s)
 === RUN   TestSimulationValidation
---- PASS: TestSimulationValidation (0.03s)
+--- PASS: TestSimulationValidation (0.02s)
 PASS
-ok  	github.com/softdevstudio/oqft	1.537s
+ok  	github.com/softdevstudio/oqft	1.801s
 === RUN   TestGen
 --- PASS: TestGen (0.00s)
 === RUN   TestGenErrors
@@ -101,7 +103,7 @@ ok  	github.com/softdevstudio/oqft	1.537s
 === RUN   TestGenHelp
 --- PASS: TestGenHelp (0.00s)
 === RUN   TestGenOptimistic
---- PASS: TestGenOptimistic (0.01s)
+--- PASS: TestGenOptimistic (0.00s)
 === RUN   TestVersion
 --- PASS: TestVersion (0.00s)
 === RUN   TestUsageErrors
@@ -111,4 +113,4 @@ ok  	github.com/softdevstudio/oqft	1.537s
 === RUN   TestStatsArguments
 --- PASS: TestStatsArguments (0.00s)
 PASS
-ok  	github.com/softdevstudio/oqft/cmd/oqft	0.015s
+ok  	github.com/softdevstudio/oqft/cmd/oqft	0.004s

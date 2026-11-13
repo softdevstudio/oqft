@@ -103,7 +103,7 @@ updated. Ask the owner for his go before starting each phase.
      CHANGELOG. Done when results are recorded in test/results.
    - [x] 1g Independent review and fixes; raise to 0.1.0. Done when the
      release workflow publishes v0.1.0 and a downloaded binary is checked.
-2. [ ] The optimistic QFT (0.2.0): first check whether the paper's authors
+2. [x] The optimistic QFT (0.2.0): first check whether the paper's authors
    published code to test against (record it in NOTICE if used). Build the
    OQFT from arXiv:2505.00701: block size m from n and eps, intra-block
    QFTs, block-phased rotations, the inserted phase-estimation blocks.
@@ -114,7 +114,7 @@ updated. Ask the owner for his go before starting each phase.
    - [x] 2a Blocked baseline and tests.
    - [x] 2b Optimistic commutation and phase-estimation blocks.
    - [x] 2c Epsilon sizing, CLI, error and depth validation, and results.
-   - [ ] 2d Independent review and 0.2.0 release.
+   - [x] 2d Independent review and 0.2.0 release.
 3. [ ] The checker (0.3.0): `oqft check -n N --eps E`, per-state error,
    failing states, failure map (text and CSV) showing the wraparound edges;
    random-basis check; failure tests that fail where predicted and only
@@ -143,15 +143,19 @@ hardware layout planner (arXiv:2605.15297); other optimistic circuits
 
 ## In progress
 
-### Assignment 2d: independent review and v0.2.0
-
-- [x] Complete independent review of circuit parity, phase estimation
-  and error sizing. Add sampled simulator coverage for public sizing.
-- [x] Raise all version markers to 0.2.0 and pass local checks.
-- [ ] Verify CI, Release and downloaded assets.
-- [ ] Refresh recorded results and close Phase 2.
+Nothing. Phase 3, the circuit checker, is next with the owner's go.
 
 ## Done
+
+### Assignment 2d: independent review and v0.2.0 (2026-11-13, Codex)
+
+Independent review found no release blocker in the circuit ordering,
+phase estimation or conservative error bound. Added a 17-qubit sampled
+test for public block sizing. The explicit-width matrix test exercises
+nontrivial commutation within the simulator limit. CI and Release
+passed at 2688986. All five archives matched SHA256SUMS, and the
+downloaded Linux amd64 binary passed version, optimistic gen and stats
+checks. Results were recorded from the released commit.
 
 ### Assignment 2c: epsilon sizing and CLI (2026-11-13, Codex)
 
@@ -259,9 +263,9 @@ scripts/record-results.sh.
 
 ## State
 
-v0.1.0 published. Phase 1 and assignments 2a–2c are complete.
+v0.2.0 published. Phases 1 and 2 are complete.
 
 ## Gaps and to-do
 
-- Independent review and the v0.2.0 release remain open (2d).
+- Phase 3, the circuit checker, remains open.
 - Site repo photozeitgeist/oqft.com doesn't exist yet (needed for Phase 4).

@@ -113,7 +113,7 @@ updated. Ask the owner for his go before starting each phase.
    phase: the stuck rules apply strictly.
    - [x] 2a Blocked baseline and tests.
    - [x] 2b Optimistic commutation and phase-estimation blocks.
-   - [ ] 2c Epsilon sizing, CLI, error and depth validation, and results.
+   - [x] 2c Epsilon sizing, CLI, error and depth validation, and results.
    - [ ] 2d Independent review and 0.2.0 release.
 3. [ ] The checker (0.3.0): `oqft check -n N --eps E`, per-state error,
    failing states, failure map (text and CSV) showing the wraparound edges;
@@ -143,15 +143,21 @@ hardware layout planner (arXiv:2605.15297); other optimistic circuits
 
 ## In progress
 
-### Assignment 2c: epsilon sizing, CLI and validation
-
-- [x] Implement conservative epsilon sizing, add CLI support, and pass
-  the local error, depth and CLI checks.
-- [ ] Record results from this commit, push them, and verify CI.
-
-Resume by running scripts/record-results.sh at this commit.
+Nothing. Next is assignment 2d, independent review and the v0.2.0 release.
 
 ## Done
+
+### Assignment 2c: epsilon sizing and CLI (2026-11-13, Codex)
+
+OQFT(n, eps) selects a block width with a conservative bound on the
+normalized squared Frobenius error. It uses exact QFT if the selected
+width would leave at most two blocks. The epsilon tests exhaustively
+cover 1–10 qubits, where the exact path applies, and separately measure
+an explicitly commuted circuit against exact QFT. At larger sizes tests
+check the commuted path and its depth through 2048 qubits. Use
+oqft gen --type oqft -n N --eps E to export, or pass --eps E to stats
+to add an OQFT comparison. The recorder captures depth and gate counts
+in test/results/optimistic-stats.txt.
 
 ### Assignment 2b: optimistic commutation (2026-11-13, Codex)
 
@@ -247,9 +253,9 @@ scripts/record-results.sh.
 
 ## State
 
-v0.1.0 published. Phase 1 and assignments 2a–2b are complete.
+v0.1.0 published. Phase 1 and assignments 2a–2c are complete.
 
 ## Gaps and to-do
 
-- Epsilon sizing, CLI integration, and results remain open (2c).
+- Independent review and the v0.2.0 release remain open (2d).
 - Site repo photozeitgeist/oqft.com doesn't exist yet (needed for Phase 4).

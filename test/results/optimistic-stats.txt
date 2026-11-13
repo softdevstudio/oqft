@@ -1,0 +1,77 @@
+Qubits: 32, AQFT cutoff: 2
+Metric                QFT       AQFT
+h                      32         32
+cp                    496         61
+swap                   16         16
+rz                      0          0
+Total gates           544        109
+Two-qubit             512         77
+Depth                  64         64
+OQFT epsilon: 0.01, total gates: 754, two-qubit gates: 692, depth: 103
+
+Qubits: 64, AQFT cutoff: 2
+Metric                QFT       AQFT
+h                      64         64
+cp                   2016        125
+swap                   32         32
+rz                      0          0
+Total gates          2112        221
+Two-qubit            2048        157
+Depth                 128        128
+OQFT epsilon: 0.01, total gates: 1616, two-qubit gates: 1520, depth: 126
+
+Qubits: 128, AQFT cutoff: 2
+Metric                QFT       AQFT
+h                     128        128
+cp                   8128        253
+swap                   64         64
+rz                      0          0
+Total gates          8320        445
+Two-qubit            8192        317
+Depth                 256        256
+OQFT epsilon: 0.01, total gates: 4270, two-qubit gates: 4034, depth: 142
+
+Qubits: 256, AQFT cutoff: 2
+Metric                QFT       AQFT
+h                     256        256
+cp                  32640        509
+swap                  128        128
+rz                      0          0
+Total gates         33024        893
+Two-qubit           32768        637
+Depth                 512        512
+OQFT epsilon: 0.01, total gates: 10024, two-qubit gates: 9528, depth: 158
+
+Qubits: 512, AQFT cutoff: 2
+Metric                QFT       AQFT
+h                     512        512
+cp                 130816       1021
+swap                  256        256
+rz                      0          0
+Total gates        131584       1789
+Two-qubit          131072       1277
+Depth                1024       1024
+OQFT epsilon: 0.01, total gates: 22442, two-qubit gates: 21446, depth: 174
+
+Qubits: 1024, AQFT cutoff: 2
+Metric                QFT       AQFT
+h                    1024       1024
+cp                 523776       2045
+swap                  512        512
+rz                      0          0
+Total gates        525312       3581
+Two-qubit          524288       2557
+Depth                2048       2048
+OQFT epsilon: 0.01, total gates: 49848, two-qubit gates: 47816, depth: 190
+
+Qubits: 2048, AQFT cutoff: 2
+Metric                QFT       AQFT
+h                    2048       2048
+cp                2096128       4093
+swap                 1024       1024
+rz                      0          0
+Total gates       2099200       7165
+Two-qubit         2097152       5117
+Depth                4096       4096
+OQFT epsilon: 0.01, total gates: 104200, two-qubit gates: 100152, depth: 198
+

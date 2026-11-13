@@ -1,5 +1,5 @@
 date: 2026-11-13
-commit: 46a74b0
+commit: b4ad21d
 oqft: 0.1.0
 go version go1.24.7 linux/amd64
 os: Linux x86_64

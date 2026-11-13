@@ -5,7 +5,7 @@ transform**: it builds the circuit, checks it on a classical simulator, and
 works out what it saves when you count the cost of breaking RSA with
 Shor's algorithm. Website: [oqft.com](https://oqft.com).
 
-> Status: setting up. The first working release is 0.1.0. See
+> Status: in development. The first planned release is 0.1.0. See
 > [CHANGELOG.md](CHANGELOG.md).
 
 ## What it is, in plain words
@@ -19,27 +19,28 @@ wrong on a small slice of inputs that almost never come up
 ([arXiv:2505.00701](https://arxiv.org/abs/2505.00701)). They called these
 *optimistic* circuits.
 
-OQFT turns that paper into a tool you can run:
+## Try it from source
 
-- `oqft gen`: the textbook, approximate and optimistic QFT as OpenQASM 3,
-  for any register size and error target
-- `oqft stats`: gate counts and depth, side by side
-- `oqft check`: runs the circuit on a simulator and shows where it fails
-- `oqft estimate`: qubits and depth for factoring an RSA key, with and
-  without the optimistic QFT
+Clone the repository and run these commands with Go 1.24 or newer:
 
-The same estimator runs in the browser as the Q-Day calculator on
-oqft.com.
-
-## Install
-
-Download the binary for your system from the
-[latest release](https://github.com/softdevstudio/oqft/releases/latest).
-Or, with Go installed:
-
+```sh
+go run ./cmd/oqft gen -n 4
+go run ./cmd/oqft gen --type aqft -n 4 --cutoff 2
+go run ./cmd/oqft stats -n 8 --cutoff 2
 ```
-go install github.com/softdevstudio/oqft/cmd/oqft@latest
-```
+
+`gen` writes the circuit as OpenQASM 3. `stats` compares the textbook
+and approximate circuits, reporting gate counts by type, total gates,
+two-qubit gates and depth. Each gate counts as one layer, and gates on
+disjoint qubits can share a layer. The AQFT cutoff defaults to 2 and
+keeps controlled rotations between qubits at most that far apart.
+
+The Go library also simulates circuits and builds their full unitary
+matrices. The [recorded results](test/results/) include sample stats and
+the test run. Regenerate them with `scripts/record-results.sh`.
+
+Optimistic circuits, the circuit checker, and the RSA resource estimator
+and browser calculator are planned in [CLAUDE.md](CLAUDE.md).
 
 ## Licence
 

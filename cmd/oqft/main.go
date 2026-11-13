@@ -9,11 +9,14 @@ import (
 	"github.com/softdevstudio/oqft"
 )
 
+const defaultCutoff = 2
+
 const usage = `oqft: optimistic quantum Fourier transform toolkit
 
 Usage:
   oqft version    print the version
   oqft gen        export a circuit as OpenQASM 3
+  oqft stats      compare QFT and AQFT gate counts and depth
   oqft help       show this help
 
 More commands arrive phase by phase; see CLAUDE.md.
@@ -29,6 +32,8 @@ func run(args []string, stdout, stderr io.Writer) int {
 		return 2
 	}
 	switch args[0] {
+	case "stats":
+		return runStats(args[1:], stdout, stderr)
 	case "gen":
 		return runGen(args[1:], stdout, stderr)
 	case "version", "--version", "-v":

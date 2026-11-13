@@ -13,4 +13,10 @@ mkdir -p test/results
   echo "os: $(uname -sm)"
 } > test/results/environment.txt
 go test -count=1 -v ./... 2>&1 | tee test/results/tests.txt
+{
+  for qubits in 4 8 16 32; do
+    go run ./cmd/oqft stats -n "$qubits" --cutoff 2
+    echo
+  done
+} > test/results/stats.txt
 echo "recorded to test/results"

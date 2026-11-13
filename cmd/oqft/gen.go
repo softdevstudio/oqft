@@ -13,7 +13,7 @@ func runGen(args []string, stdout, stderr io.Writer) int {
 	flags.SetOutput(stderr)
 	kind := flags.String("type", "qft", "circuit type (qft or aqft)")
 	n := flags.Int("n", 0, "number of qubits (required)")
-	cutoff := flags.Int("cutoff", 2, "maximum distance between qubits for AQFT rotations")
+	cutoff := flags.Int("cutoff", defaultCutoff, "maximum distance between qubits for AQFT rotations")
 	flags.Usage = func() {
 		fmt.Fprintln(flags.Output(), "Usage: oqft gen --type qft|aqft -n N [--cutoff K]")
 		flags.PrintDefaults()

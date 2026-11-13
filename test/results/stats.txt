@@ -1,0 +1,40 @@
+Qubits: 4, AQFT cutoff: 2
+Metric                QFT       AQFT
+h                       4          4
+cp                      6          5
+swap                    2          2
+rz                      0          0
+Total gates            12         11
+Two-qubit               8          7
+Depth                   8          8
+
+Qubits: 8, AQFT cutoff: 2
+Metric                QFT       AQFT
+h                       8          8
+cp                     28         13
+swap                    4          4
+rz                      0          0
+Total gates            40         25
+Two-qubit              32         17
+Depth                  16         16
+
+Qubits: 16, AQFT cutoff: 2
+Metric                QFT       AQFT
+h                      16         16
+cp                    120         29
+swap                    8          8
+rz                      0          0
+Total gates           144         53
+Two-qubit             128         37
+Depth                  32         32
+
+Qubits: 32, AQFT cutoff: 2
+Metric                QFT       AQFT
+h                      32         32
+cp                    496         61
+swap                   16         16
+rz                      0          0
+Total gates           544        109
+Two-qubit             512         77
+Depth                  64         64
+

@@ -99,7 +99,7 @@ updated. Ask the owner for his go before starting each phase.
      a qubit-distance cutoff). Verified against the exact QFT.
    - [x] 1e OpenQASM 3 export; `oqft gen --type qft|aqft -n N`. Done when
      golden-file and CLI tests pass.
-   - [ ] 1f `oqft stats`; scripts/record-results.sh run; README and
+   - [x] 1f `oqft stats`; scripts/record-results.sh run; README and
      CHANGELOG. Done when results are recorded in test/results.
    - [ ] 1g Independent review and fixes; raise to 0.1.0. Done when the
      release workflow publishes v0.1.0 and a downloaded binary is checked.
@@ -139,14 +139,16 @@ hardware layout planner (arXiv:2605.15297); other optimistic circuits
 
 ## In progress
 
-### Assignment 1f: stats and recorded results
-
-- [x] Add and test stats, extend the recorder, update README and changelog.
-- [ ] Record results from this commit, push them, and verify CI.
-
-Resume by running scripts/record-results.sh at this commit.
+Nothing. Next is assignment 1g, independent review and the 0.1.0 release.
 
 ## Done
+
+### Assignment 1f: stats and recorded results (2026-11-13, Codex)
+
+`oqft stats -n N [--cutoff K]` compares QFT and AQFT gate counts
+and depth. The recorder captures test output, environment and sample
+stats under test/results. README examples and the unreleased changelog
+describe the available commands.
 
 ### Assignment 1e: OpenQASM 3 export (2026-11-13, Codex)
 
@@ -207,9 +209,9 @@ scripts/record-results.sh.
 
 ## State
 
-0.0.0. Circuit model, simulator, QFT, AQFT and OpenQASM export in place (1a–1e). Nothing released.
+0.0.0. Circuit model, simulator, QFT, AQFT, OpenQASM export and stats in place (1a–1f). Nothing released.
 
 ## Gaps and to-do
 
-- Circuit statistics and recorded results remain open (1f).
+- Independent review and the 0.1.0 release remain open (1g).
 - Site repo photozeitgeist/oqft.com doesn't exist yet (needed for Phase 4).

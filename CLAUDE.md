@@ -119,7 +119,7 @@ updated. Ask the owner for his go before starting each phase.
    failing states, failure map (text and CSV) showing the wraparound edges;
    random-basis check; failure tests that fail where predicted and only
    there.
-   - [ ] 3a Per-state error checker and wraparound regression test.
+   - [x] 3a Per-state error checker and wraparound regression test.
    - [ ] 3b CLI, exhaustive and sampled reports, text and CSV maps.
    - [ ] 3c Recorded results, independent review and v0.3.0 release.
 4. [ ] Site launch: oqft.com on the Launch template. Pages About (incl. the
@@ -146,18 +146,17 @@ hardware layout planner (arXiv:2605.15297); other optimistic circuits
 
 ## In progress
 
-### Assignment 3a: per-state error checker
-
-Build a reusable checker that compares a generated circuit against the
-exact QFT one basis state at a time. Return squared amplitude distance
-and validate register size and basis indices. Keep selection, reporting,
-and failure maps for the next assignment.
-
-- [x] Pull main and pass baseline tests.
-- [ ] Implement and test per-state error measurement.
-- [ ] Push and verify CI.
+Nothing. Next is assignment 3b, checker CLI and failure maps.
 
 ## Done
+
+### Assignment 3a: per-state error checker (2026-11-13, Codex)
+
+NewChecker validates and snapshots a circuit. StateError measures the
+squared Euclidean distance to textbook QFT for a basis input. The
+wraparound regression sweeps a three-qubit estimated block with its
+neighbor fixed at seven and checks that only the upper edge exceeds
+the test threshold.
 
 ### Assignment 2d: independent review and v0.2.0 (2026-11-13, Codex)
 
@@ -279,5 +278,5 @@ v0.2.0 published. Phases 1 and 2 are complete.
 
 ## Gaps and to-do
 
-- Phase 3, the circuit checker, remains open.
+- Checker CLI, sampling, and failure maps remain open (3b).
 - Site repo photozeitgeist/oqft.com doesn't exist yet (needed for Phase 4).
